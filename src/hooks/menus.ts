@@ -2,10 +2,10 @@ import { ref } from "vue"
 import { fetchData } from "@/hooks/fetch"
 export async function menuData():Promise<any> {
   const loading = ref<boolean>(false)
-  const { response:menus, request } = fetchData('./data/menus.json')
+  const { response:data, request } = fetchData('./data/menus.json')
   if (!loading.value) {
     await request()
     loading.value = true
   }
-  return { menus }
+  return { data }
 }
