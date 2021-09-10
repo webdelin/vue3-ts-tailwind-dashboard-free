@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-no-wrap bg-gray-200">
-    <the-sidebar></the-sidebar>
+      <the-sidebar></the-sidebar>
     <router-view />
   </div>
 </template>

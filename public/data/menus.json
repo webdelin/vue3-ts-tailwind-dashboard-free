@@ -1,0 +1,27 @@
+{
+    "menus": [{
+            "to": "/dashboard",
+            "label": "Daschboard",
+            "icon": "mdiTable"
+        },
+        {
+            "to": "/users",
+            "label": "Users",
+            "icon": "mdiTable",
+            "child": [{
+                    "label": "Seite One",
+                    "to": "/seite1"
+                },
+                {
+                    "label": "Seite Two",
+                    "to": "/seite2"
+                }
+            ]
+        },
+        {
+            "to": "/login",
+            "label": "Login",
+            "icon": "mdiTable"
+        }
+    ]
+}
