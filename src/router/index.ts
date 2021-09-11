@@ -3,9 +3,14 @@ import Home from '../views/Home.vue'
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/',
+    path: '/dashboard',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    component: () => import('../views/Users.vue')
   },
   {
     path: '/login',

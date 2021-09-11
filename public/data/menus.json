@@ -1,27 +1,21 @@
-{
-    "menus": [{
-            "to": "/dashboard",
-            "label": "Daschboard",
-            "icon": "mdiTable"
-        },
-        {
-            "to": "/users",
-            "label": "Users",
-            "icon": "mdiTable",
-            "child": [{
-                    "label": "Seite One",
-                    "to": "/seite1"
-                },
-                {
-                    "label": "Seite Two",
-                    "to": "/seite2"
-                }
-            ]
-        },
-        {
-            "to": "/login",
-            "label": "Login",
-            "icon": "mdiTable"
-        }
-    ]
-}
+[{
+        "id": 1,
+        "to": "/dashboard",
+        "label": "Dashboard",
+        "icon": "mdiTable",
+        "child": []
+    },
+    {
+        "id": 2,
+        "to": "/users",
+        "label": "Users",
+        "icon": "mdiTable",
+        "child": []
+    },
+    {
+        "id": 3,
+        "to": "/login",
+        "label": "Login",
+        "icon": "mdiTable"
+    }
+]

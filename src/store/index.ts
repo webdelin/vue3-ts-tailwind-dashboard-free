@@ -1,12 +1,23 @@
-import { createStore } from 'vuex'
+import { createStore, createLogger } from "vuex"
+import dashboard from "./modules/dashboard"
+const plugins = []
+if (process.env.NODE_ENV === "development") {
+    plugins.push(createLogger())
+}
 
 export default createStore({
-  state: {
+  plugins,
+  state() {
+    return {
+    }
   },
   mutations: {
   },
   actions: {
   },
+  getters: {
+  },
   modules: {
+    dashboard
   }
 })
