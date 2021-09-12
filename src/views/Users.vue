@@ -1,22 +1,23 @@
 <template>
+  <main class="pt-16 sm:pl-64">
+    <div class="p-4">
+      <h1 class="text-gray-700 text-xs uppercase tracking-wider">{{title}}</h1>
+        <UserItems />
 
-  <div class="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
-    <h1>{{ title }}</h1>
-    <div
-      class="w-full h-full rounded border-dashed border-2 border-gray-300"
-    >
-
+      <Suspense>
+      </Suspense>
     </div>
-  </div>
-
+  </main>
 </template>
 
 <script lang="ts">
+import UserItems from "@/components/users/UserItems.vue";
 import { defineComponent } from "vue";
 export default defineComponent({
-  async setup() {
+  components: { UserItems },
+  setup() {
     return {
-      title: "Users"
+      title: "Users",
     };
   },
 });

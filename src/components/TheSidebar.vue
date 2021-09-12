@@ -49,9 +49,9 @@
           <div class="text-yellow-500 text-xl sm:text-sm">10.000 BET</div>
         </div>
       </div>
+      <Suspense>
         <SidebarItems />
-<!--         <Suspense>
-        </Suspense> -->
+      </Suspense>
     </div>
   </aside>
 </template>
@@ -63,6 +63,5 @@ export default defineComponent({
   components: {
     SidebarItems,
   },
-
 });
 </script>

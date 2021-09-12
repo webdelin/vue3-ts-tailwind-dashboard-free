@@ -113,7 +113,9 @@
                   </div>
                 </div>
               </div>
-               <SidebarItems />
+              <Suspense>
+                <SidebarItems />
+              </Suspense>
             </div>
           </div>
         </div>
