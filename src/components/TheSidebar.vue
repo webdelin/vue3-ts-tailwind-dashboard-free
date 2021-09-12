@@ -49,17 +49,15 @@
           <div class="text-yellow-500 text-xl sm:text-sm">10.000 BET</div>
         </div>
       </div>
-      <div class="mt-4">
         <SidebarItems :menu="menu" v-for="(menu, i) in categories[0]" :key="i" />
-        <Suspense>
-        </Suspense>
-      </div>
+<!--         <Suspense>
+        </Suspense> -->
     </div>
   </aside>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import { useStore } from "vuex";
 import SidebarItems from "@/components/sidebar/SidebarItems.vue";
 export default defineComponent({
@@ -68,31 +66,10 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-      const isNotificationsOpen = ref(false)
-      const isMenuOpen = ref(false)
-    
     store.dispatch("dashboard/getCategories");
     return {
-      categories: store.getters["dashboard/categories"],
-        isNotificationsOpen,
-        isMenuOpen
+      categories: store.getters["dashboard/categories"]
     };
   },
 });
 </script>
-<style scoped>
-.h-screen {
-  height: 100vh;
-  height: -webkit-fill-available;
-}
-
-.min-h-screen {
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-}
-
-.max-h-screen {
-  max-height: 100vh;
-  max-height: -webkit-fill-available;
-}
-</style>

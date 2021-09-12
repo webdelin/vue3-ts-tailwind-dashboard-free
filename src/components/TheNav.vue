@@ -22,7 +22,7 @@
       <button
         class="p-1 hover:text-white"
         :class="{ 'text-white': isMenuOpen }"
-        @click="toggleMenu = !toggleMenu"
+        @click="menuOpen"
       >
         <svg
           class="fill-current w-10 h-10"
@@ -49,7 +49,7 @@
         <div
           v-show="isMenuOpen"
           class="absolute inset-0 h-screen"
-          @click.self="toggleMenu = !toggleMenu"
+          @click.self="menuOpen"
         >
           <div ref="menu" class="mt-16 absolute inset-0 z-40 overflow-y-auto">
             <div class="py-6 w-full min-h-full bg-gray-700">
@@ -113,51 +113,7 @@
                   </div>
                 </div>
               </div>
-
-              <!-- Extract: menu_items -->
-              <div class="mt-4">
-                <!-- TODO: add group here and group-hover to the shevron icon to show it only when the group is hovered -->
-                <a
-                  v-for="i in 6"
-                  :key="i"
-                  href="#"
-                  class="
-                    px-10
-                    py-2
-                    flex
-                    items-center
-                    text-xl text-gray-100
-                    hover:text-orange-500
-                    sm:px-4
-                    sm:text-base
-                  "
-                >
-                  <div>
-                    <svg
-                      class="w-6 h-6 stroke-current"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 72 71"
-                    >
-                      <path
-                        d="M28.559 5.848c2.665-6.75 12.217-6.75 14.882 0l.691 1.751a8 8 0 009.784 4.712l1.8-.551c6.938-2.125 12.895 5.343 9.279 11.635l-.938 1.632a8 8 0 002.416 10.587l1.553 1.063c5.988 4.1 3.862 13.413-3.311 14.51l-1.86.284a8 8 0 00-6.771 8.49l.136 1.877c.528 7.238-8.079 11.382-13.408 6.457l-1.382-1.277a8 8 0 00-10.86 0l-1.382 1.277c-5.33 4.925-13.936.78-13.408-6.457l.136-1.877a8 8 0 00-6.77-8.49l-1.86-.285c-7.174-1.096-9.3-10.409-3.312-14.509l1.553-1.063a8 8 0 002.416-10.587l-.938-1.632c-3.616-6.292 2.34-13.76 9.28-11.635l1.799.55a8 8 0 009.784-4.71l.69-1.752z"
-                        fill="none"
-                      />
-                    </svg>
-                  </div>
-                  <div class="ml-6 flex-1 sm:ml-4">Item #{{ i + 1 }}</div>
-                  <div>
-                    <svg
-                      class="fill-current w-6 h-6 hover:block"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        d="M9.3 8.7a1 1 0 011.4-1.4l4 4a1 1 0 010 1.4l-4 4a1 1 0 01-1.4-1.4l3.29-3.3-3.3-3.3z"
-                      />
-                    </svg>
-                  </div>
-                </a>
-              </div>
+               <SidebarItems :menu="menu" v-for="(menu, i) in categories[0]" :key="i" />
             </div>
           </div>
         </div>
@@ -176,120 +132,36 @@
         </svg>
       </a>
     </div>
-
-    <!-- Extract: Notifications Vue component -->
-    <div
-      class="
-        w-16
-        h-16
-        flex
-        justify-center
-        items-center
-        text-gray-600
-        border-l border-gray-600
-      "
-    >
-      <button
-        class="p-1 hover:text-white focus:text-white focus:outline-none"
-        :class="{ 'text-white': isNotificationsOpen }"
-        @click="toggleNotifications = !toggleNotifications"
-      >
-        <svg class="fill-current w-10 h-10" viewBox="0 0 24 24">
-          <path
-            d="M11.5,22C11.64,22 11.77,22 11.9,21.96C12.55,21.82 13.09,21.38 13.34,20.78C13.44,20.54 13.5,20.27 13.5,20H9.5A2,2 0 0,0 11.5,22M18,10.5C18,7.43 15.86,4.86 13,4.18V3.5A1.5,1.5 0 0,0 11.5,2A1.5,1.5 0 0,0 10,3.5V4.18C7.13,4.86 5,7.43 5,10.5V16L3,18V19H20V18L18,16M19.97,10H21.97C21.82,6.79 20.24,3.97 17.85,2.15L16.42,3.58C18.46,5 19.82,7.35 19.97,10M6.58,3.58L5.15,2.15C2.76,3.97 1.18,6.79 1,10H3C3.18,7.35 4.54,5 6.58,3.58Z"
-          ></path>
-        </svg>
-      </button>
-
-      <transition
-        enter-active-class="transition duration-200 ease-in-out"
-        enter-class="opacity-0"
-      >
-        <div
-          v-show="isNotificationsOpen"
-          class="
-            absolute
-            inset-0
-            z-30
-            min-h-screen
-            bg-black
-            opacity-50
-            focus:outline-none
-          "
-          @click="toggleNotifications = !toggleNotifications"
-          tabindex="-1"
-        ></div>
-      </transition>
-
-      <transition
-        enter-active-class="transition duration-200 ease-in-out transform"
-        enter-class="translate-x-full"
-        leave-active-class="transition duration-200 ease-in-out transform"
-        leave-to-class="translate-x-full"
-      >
-        <div
-          v-show="isNotificationsOpen"
-          class="pt-16 absolute inset-0 h-full h-screen"
-        >
-          <div
-            ref="notifications"
-            class="
-              mt-16
-              absolute
-              right-0
-              inset-y-0
-              w-full
-              max-w-sm
-              overflow-y-auto
-            "
-          >
-            <div
-              class="
-                relative
-                z-40
-                py-2
-                text-gray-700
-                bg-white
-                border border-yellow-400
-                shadow-lg
-              "
-            >
-              <a
-                href="#"
-                class="block px-4 py-2 hover:text-gray-100 hover:bg-gray-800"
-                v-for="i in 5"
-                :key="i"
-              >
-                Notification {{ i + 1 }}
-              </a>
-            </div>
-          </div>
-        </div>
-      </transition>
-    </div>
+    <Notification
+      :isNotificationsOpen="isNotificationsOpen"
+      @notificationsOpen="notificationsOpen"
+    />
   </nav>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
+import Notification from "@/components/notification/Index.vue";
 
+import SidebarItems from "@/components/sidebar/SidebarItems.vue";
+import { defineComponent, ref } from "vue";
+import {useStore} from "vuex"
 export default defineComponent({
+  components: { Notification, SidebarItems },
   setup() {
-    const isNotificationsOpen = ref(false);
-    const isMenuOpen = ref(false);
-
-    watch(
-      [isNotificationsOpen, isMenuOpen],
-      (newValue, oldValue) => {
-        console.log(newValue[0])
-        console.log(oldValue[0])
-        isNotificationsOpen.value =newValue[0]
-        isMenuOpen.value = newValue[1]
-      }
-    );
+    const isNotificationsOpen = ref<boolean>(false);
+    const isMenuOpen = ref<boolean>(false);
+    const store = useStore();
+    store.dispatch("dashboard/getCategories");
     return {
+      menuOpen: () => {
+        isMenuOpen.value = !isMenuOpen.value;
+      },
+      notificationsOpen: () => {
+        isNotificationsOpen.value = !isNotificationsOpen.value;
+      },
       isNotificationsOpen,
       isMenuOpen,
+      categories: store.getters["dashboard/categories"]
     };
   },
 });
