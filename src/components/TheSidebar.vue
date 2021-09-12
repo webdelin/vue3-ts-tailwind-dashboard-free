@@ -49,7 +49,7 @@
           <div class="text-yellow-500 text-xl sm:text-sm">10.000 BET</div>
         </div>
       </div>
-        <SidebarItems :menu="menu" v-for="(menu, i) in categories[0]" :key="i" />
+        <SidebarItems />
 <!--         <Suspense>
         </Suspense> -->
     </div>
@@ -58,18 +58,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useStore } from "vuex";
 import SidebarItems from "@/components/sidebar/SidebarItems.vue";
 export default defineComponent({
   components: {
     SidebarItems,
   },
-  setup() {
-    const store = useStore();
-    store.dispatch("dashboard/getCategories");
-    return {
-      categories: store.getters["dashboard/categories"]
-    };
-  },
+
 });
 </script>

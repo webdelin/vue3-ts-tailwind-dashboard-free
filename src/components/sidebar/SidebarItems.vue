@@ -1,8 +1,6 @@
 <template>
-  <div class="mt-4">
-    <router-link
-      :to="menu.to"
-      :title="menu.label"
+  <div class="mt-4" v-for="(menu, i) in categories[0]" :key="i" >
+    <div
       class="
         px-10
         py-2
@@ -24,7 +22,9 @@
           fill="none"
         />
       </svg>
-      <div class="ml-6 flex-1 sm:ml-4">{{ menu.label }}</div>
+      <router-link 
+      :to="menu.to"
+      :title="menu.label" class="ml-6 flex-1 sm:ml-4">{{ menu.label }}</router-link>
 
       <span v-if="menu.child && menu.child.length">
         <svg
@@ -45,13 +45,19 @@
           >{{ submenu.label }}</router-link
         >
       </span>
-    </router-link>
+    </div>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
-
+import { useStore } from "vuex";
 export default defineComponent({
-  props: ["menu"],
+  setup() {
+    const store = useStore();
+    store.dispatch("dashboard/getCategories");
+    return {
+      categories: store.getters["dashboard/categories"]
+    };
+  },
 });
 </script>

@@ -113,7 +113,7 @@
                   </div>
                 </div>
               </div>
-               <SidebarItems :menu="menu" v-for="(menu, i) in categories[0]" :key="i" />
+               <SidebarItems />
             </div>
           </div>
         </div>
@@ -141,17 +141,13 @@
 
 <script lang="ts">
 import Notification from "@/components/notification/Index.vue";
-
 import SidebarItems from "@/components/sidebar/SidebarItems.vue";
 import { defineComponent, ref } from "vue";
-import {useStore} from "vuex"
 export default defineComponent({
   components: { Notification, SidebarItems },
   setup() {
     const isNotificationsOpen = ref<boolean>(false);
     const isMenuOpen = ref<boolean>(false);
-    const store = useStore();
-    store.dispatch("dashboard/getCategories");
     return {
       menuOpen: () => {
         isMenuOpen.value = !isMenuOpen.value;
@@ -161,7 +157,6 @@ export default defineComponent({
       },
       isNotificationsOpen,
       isMenuOpen,
-      categories: store.getters["dashboard/categories"]
     };
   },
 });
